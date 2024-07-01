@@ -2,6 +2,7 @@
 import data.Address;
 import data.Client;
 import parser.XMLDataParser;
+import task.CountFloor;
 import task.DublicateAddress;
 
 import java.io.File;
@@ -14,6 +15,7 @@ public class IDEMain {
         parser.parseAddress(new File("address.xml"));
         List<Client> ListClients = parser.getParserClient().getClients();
         List<Address> ListAddress = parser.getParserAddress().getAddress();
+        /////// вывод результата парсинга
         for (Client client : ListClients) {
             System.out.println(client);
         }
@@ -24,7 +26,15 @@ public class IDEMain {
         }
         System.out.println();
         System.out.println();
+        //////////////////////////////////////////
+
+        /////// доп задача №2
         DublicateAddress dublicateAddress = new DublicateAddress();
         dublicateAddress.findDublicateAddress(ListClients, ListAddress);
+        ////////////////////////////////////////////////////////////////////////
+
+        //////////// доп задача №3
+        CountFloor count = new CountFloor();
+        count.CountingFloor(ListAddress);
     }
 }
