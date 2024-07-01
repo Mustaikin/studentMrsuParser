@@ -6,9 +6,8 @@ import exception.FileParceException;
 import parser.XMLDataParser;
 import task.CountFloor;
 import task.DublicateAddress;
-
 import java.io.File;
-import java.util.List;
+
 
 public class IDEMain {
     public static void main(String[] args) throws FileParceException, CheckFilePathException {
@@ -16,16 +15,7 @@ public class IDEMain {
         parser.parseClient(new File("client.xml"));
         parser.parseAddress(new File("address.xml"));
         /////// вывод результата парсинга
-        for (Client client : parser.getParserClient().getClients()) {
-            System.out.println(client);
-        }
-        System.out.println();
-        System.out.println();
-        for (Address addr : parser.getParserAddress().getAddress()) {
-            System.out.println(addr);
-        }
-        System.out.println();
-        System.out.println();
+        parser.print();
         //////////////////////////////////////////
 
         /////// доп задача №2

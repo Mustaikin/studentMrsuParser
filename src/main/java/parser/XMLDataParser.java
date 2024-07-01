@@ -1,5 +1,7 @@
 package parser;
 
+import data.Address;
+import data.Client;
 import exception.CheckFilePathException;
 import exception.FileParceException;
 
@@ -33,5 +35,18 @@ public class XMLDataParser{
 
     public void setParserAddress(XMLParserAddress parserAddress) {
         this.parserAddress = parserAddress;
+    }
+
+    public void  print() {
+        for (Client client : parserClient.getClients()) {
+            System.out.println(client);
+        }
+        System.out.println("\n");
+        System.out.println();
+        for (Address address : parserAddress.getAddress()) {
+            System.out.println(address);
+        }
+        System.out.println("\n");
+        System.out.println();
     }
 }
