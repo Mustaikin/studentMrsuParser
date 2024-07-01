@@ -1,6 +1,8 @@
 package parser;
 
 import data.Client;
+import exception.CheckFilePathException;
+import exception.FileParceException;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -15,19 +17,19 @@ import java.util.List;
 public class XMLParserClient implements Parser{
     private List<Client> clients;
     @Override
-    public void parse(File file){
+    public void parse(File file) throws FileParceException, CheckFilePathException {
         this.clients = readClient(file);
     }
-    private List<Client> readClient(File file){
+    private List<Client> readClient(File file) throws FileParceException, CheckFilePathException {
         List<Client> listClient = new ArrayList<>();
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLStreamReader parser = null;
         try {
             parser = factory.createXMLStreamReader(new FileInputStream(file));
         } catch (XMLStreamException e) {
-            System.out.println(e.getMessage());
+            throw new FileParceException();
         } catch (FileNotFoundException e) {
-            System.out.println("Check file path");
+            throw new CheckFilePathException();
         }
         try{
             while(true){
@@ -44,7 +46,7 @@ public class XMLParserClient implements Parser{
                 }
             }
         } catch (XMLStreamException e) {
-            System.out.println(e.getMessage());
+            throw new FileParceException();
         }
 
         return listClient;

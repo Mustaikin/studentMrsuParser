@@ -1,5 +1,8 @@
 package parser;
 
+import exception.CheckFilePathException;
+import exception.FileParceException;
+
 import java.io.File;
 
 public class XMLDataParser{
@@ -9,10 +12,10 @@ public class XMLDataParser{
         this.parserClient = new XMLParserClient();
         this.parserAddress = new XMLParserAddress();
     }
-    public void parseClient(File file){
+    public void parseClient(File file) throws FileParceException, CheckFilePathException {
         parserClient.parse(file);
     }
-    public void parseAddress(File file){
+    public void parseAddress(File file) throws CheckFilePathException, FileParceException {
         parserAddress.parse(file);
     }
 

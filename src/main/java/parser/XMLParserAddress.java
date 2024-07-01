@@ -1,6 +1,8 @@
 package parser;
 
 import data.Address;
+import exception.CheckFilePathException;
+import exception.FileParceException;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -20,11 +22,11 @@ public class XMLParserAddress implements Parser {
     }
 
     @Override
-    public void parse(File file) {
+    public void parse(File file) throws CheckFilePathException, FileParceException {
         address = readAddress(file);
     }
 
-    private List<Address> readAddress(File file) {
+    private List<Address> readAddress(File file) throws FileParceException, CheckFilePathException {
         List<Address> ListAddress = new ArrayList<>();
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLStreamReader parser = null;
@@ -32,9 +34,9 @@ public class XMLParserAddress implements Parser {
         try {
             parser = factory.createXMLStreamReader(new FileInputStream(file));
         } catch (FileNotFoundException e) {
-            System.out.println("Check file path");
+            throw new CheckFilePathException();
         } catch (XMLStreamException e) {
-            System.out.println(e.getMessage());
+            throw new FileParceException();
         }
 
         try {
@@ -54,7 +56,7 @@ public class XMLParserAddress implements Parser {
                 }
             }
         } catch (XMLStreamException e) {
-            System.out.println(e.getMessage());
+            throw new FileParceException();
         }
         return ListAddress;
     }
